@@ -26,7 +26,7 @@ You should get this message: **Server has been successfully connected**
 
 ***Before setting up your commands on Tip4serv.com, you should know that command work in your server's console (not ingame as an admin).***
 
-Here are some commands you can use in the products configuration: (https://tip4serv.com/dashboard/my-products).
+Here are some commands you can use in the products configuration: [MY PRODUCTS](https://tip4serv.com/dashboard/my-products)
 
 ##### oxide.usergroup add {steam_id} [group-name]
 
