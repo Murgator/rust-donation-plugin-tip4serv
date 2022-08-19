@@ -61,7 +61,7 @@ Examples:
 
 `oxide.grant revoke {steam_id} vanish.permanent`
 
-## Give an inventoy item
+## Give an inventoy item or a kit
 
 Give plugin is required: https://umod.org/plugins/give
 
