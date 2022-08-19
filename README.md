@@ -9,7 +9,7 @@ Tip4serv adds a layer of security using HMAC authentication to communicate. It i
 
 #### Dependency
 
-Install oxyde mod on your server: https://oxidemod.org/
+Install oxyde mod on your server: [https://umod.org/](https://umod.org/games/rust)
 
 #### Installation
 
