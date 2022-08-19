@@ -62,7 +62,7 @@ Examples:
 
 ## Give an inventoy item or a kit
 
-Give plugin is required: https://umod.org/plugins/give
+[Give plugin is required](https://umod.org/plugins/give)
 
 ##### giveto {steam_id} [item-short-name] [quantity]
 
