@@ -1,7 +1,7 @@
 ## Donation plugin for Rust (Tip4Serv)
 
 This plugin connects your [Tip4serv.com](https://tip4serv.com/) store to your Rust oxide server.
-It checks if a player has made a donation on your Tip4Serv store and delivers the order (group, inventory item...) by typing commands in the server console
+It checks if a player has made a donation on your Tip4Serv store and delivers the order in a minute (group, inventory item...) by typing commands in the server console
 
 #### HMAC authentification
 
@@ -23,18 +23,11 @@ You get this message in the console when the server has started: **Server has be
 
 To check if the server is correctly connected type `oxide.reload tip4serv` in your server console.
 
-## How to buy and receive your order
-
-1) Player make a donation on Tip4Serv store.
-2) The player receives his order in the game in a minute.
-
 ## Setting up commands on Tip4Serv
 
 ***Before setting up your commands on Tip4serv.com, you should know that command work in your server's console (not ingame as an admin).***
 
 Here are some commands you can use in the products configuration: (https://tip4serv.com/dashboard/my-products).
-
-When the player is connected on the Rust server, his `{rust_username}` will be retrieved using the `Steam ID` that he will have entered during his purchase.
 
 ##### oxide.usergroup add {steam_id} [group-name]
 
