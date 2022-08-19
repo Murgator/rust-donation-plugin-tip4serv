@@ -78,4 +78,4 @@ Example: `givekitto {steam_id} premium`
 
 ## Need help ?
 
-Contact us on https://tip4serv.com/contact
+[Contact us](https://tip4serv.com/contact)
