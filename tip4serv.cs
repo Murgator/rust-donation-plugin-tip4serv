@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 namespace Oxide.Plugins
 {
     [Info("tip4serv","Murgator & Duster","1.2")]
+    [Description("This Rust donation plugin connects your Tip4serv store to your Rust server")]    
     public class tip4serv : CovalencePlugin
     {
         public static class Globals
