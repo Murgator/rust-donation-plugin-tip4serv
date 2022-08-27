@@ -16,9 +16,9 @@ Install oxyde mod on your server: [https://umod.org/](https://umod.org/games/rus
 Open an account on [Tip4serv.com](https://tip4serv.com/), follow the instructions and add a Rust server.
 
 1) Drag and drop `tip4serv.cs` into the oxide `plugins` directory on your Rust server.
-2) Reload the plugin by typing `oxide.reload tip4serv` in your Rust server console.
+2) Reload the plugin by typing `oxide.reload Tip4serv` in your Rust server console.
 3) Set `key` to your tip4serv API key in the config file `tip4serv.json`.
-4) Reload plugin by typing `oxide.reload tip4serv` in console.
+4) Reload plugin by typing `oxide.reload Tip4serv` in console.
 
 You should get this message: **Server has been successfully connected**
 
