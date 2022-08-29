@@ -22,15 +22,19 @@ You should get this message: **Server has been successfully connected**
 Here are some commands you can use in the products configuration: [MY PRODUCTS](https://tip4serv.com/dashboard/my-products)
 
 Add a player to a group previously created with oxide.group add [group-name]:
+
 `oxide.usergroup add {steam_id} [group-name]`
 
 Remove a player from a group:
+
 `oxide.usergroup remove {steam_id} [group-name]`
 
 Give a permission to a player:
+
 `oxide.grant user {steam_id} [permission-name]`
 
 Remove a permission from a player:
+
 `oxide.revoke user {steam_id} [permission-name]`
 
 ## Give an inventoy item or a kit
@@ -38,9 +42,11 @@ Remove a permission from a player:
 [Give plugin is required](https://umod.org/plugins/give)
 
 Give an item to a player inventory:
+
 `giveto {steam_id} (item-short-name) (quantity)`
 
 Give a kit to a player:
+
 `givekitto {steam_id} (kit-name)`
 
 ## Need help?
