@@ -13,7 +13,7 @@ Open an account on [Tip4serv.com](https://tip4serv.com/), follow the instruction
 3) Set `key` to your tip4serv API key in the config file `tip4serv.json`.
 4) Reload plugin by typing `oxide.reload Tip4serv` in console.
 
-You should get this message: **Server has been successfully connected**
+> You should get this message: **Server has been successfully connected**
 
 ## Setting up commands on Tip4Serv
 
