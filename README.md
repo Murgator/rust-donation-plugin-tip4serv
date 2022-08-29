@@ -4,6 +4,35 @@ This plugin connects your [Tip4serv.com](https://tip4serv.com/) store to your Ru
 
 Tip4serv adds a layer of security using HMAC authentication to communicate. It is a strong authentication method that is used by banks https://en.wikipedia.org/wiki/HMAC
 
+# Price
+
+We take a 5% commission and that’s it ! You have access to all features with no subscription required.
+
+# Features
+
+* Unlimited game servers & commands
+* Create subscriptions plan
+* Commands status tracking
+* Stock management
+* Deliver roles & messages on Discord
+* Easily offer a product to a friend
+* Create discount coupon
+* Add managers for your store
+* Purchase email and invoice
+* Sales statistics
+* Private flow for subscribers
+* Custom sub-domain
+* Customize store colors
+* No ads
+
+# Store available in 15 languages
+
+English, Danish, Dutch, English, French, German, Hungarian, Italian, Norwegian, Polish, Portuguese, Romanian, Russian, Spanish, Swedish and Turkish.
+
+# Several payment methods
+
+Here are the payment methods you can offer your players: Card, Paypal, Google Pay, Ideal, Giropay, Bancontact, Sofort, Sepa, EPS, BACS, Multibanco, BECS, Przelexy24, BOLETO, OXXO, Afterpay.
+
 ## Installation
 
 Open an account on [Tip4serv.com](https://tip4serv.com/), follow the instructions and add a Rust server.
