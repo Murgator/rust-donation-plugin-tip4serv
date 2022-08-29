@@ -4,11 +4,11 @@ This plugin connects your [Tip4serv.com](https://tip4serv.com/) store to your Ru
 
 Tip4serv adds a layer of security using HMAC authentication to communicate. It is a strong authentication method that is used by banks https://en.wikipedia.org/wiki/HMAC
 
-# Price
+## Price
 
 We take a 5% commission and that’s it ! You have access to all features with no subscription required.
 
-# Features
+## Features
 
 * Unlimited game servers & commands
 * Create subscriptions plan
@@ -25,11 +25,11 @@ We take a 5% commission and that’s it ! You have access to all features with n
 * Customize store colors
 * No ads
 
-# Store available in 15 languages
+## Store available in 15 languages
 
 English, Danish, Dutch, English, French, German, Hungarian, Italian, Norwegian, Polish, Portuguese, Romanian, Russian, Spanish, Swedish and Turkish.
 
-# Several payment methods
+## Several payment methods
 
 Here are the payment methods you can offer your players: Card, Paypal, Google Pay, Ideal, Giropay, Bancontact, Sofort, Sepa, EPS, BACS, Multibanco, BECS, Przelexy24, BOLETO, OXXO, Afterpay.
 
