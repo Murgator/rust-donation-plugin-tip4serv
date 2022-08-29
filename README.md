@@ -2,7 +2,7 @@ This plugin connects your [Tip4serv.com](https://tip4serv.com/) store to your Ru
 
 ## HMAC authentication
 
-Tip4serv adds a layer of security using HMAC authentication to communicate. It is a strong authentication method that is used by banks https://en.wikipedia.org/wiki/HMAC
+Tip4serv adds a layer of security using HMAC authentication to communicate. It is a strong authentication method that is used by banks [HMAC WIKI](https://en.wikipedia.org/wiki/HMAC)
 
 ## Price
 
