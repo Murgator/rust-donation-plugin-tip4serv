@@ -72,11 +72,11 @@ Remove a permission from a player:
 
 Give an item to a player inventory:
 
-`giveto {steam_id} (item-short-name) (quantity)`
+`giveto {steam_id} item-short-name quantity`
 
 Give a kit to a player:
 
-`givekitto {steam_id} (kit-name)`
+`givekitto {steam_id} kit-name`
 
 ## Need help?
 
