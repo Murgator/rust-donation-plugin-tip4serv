@@ -52,19 +52,19 @@ Here are some commands you can use in the products configuration: [MY PRODUCTS](
 
 Add a player to a group previously created with oxide.group add [group-name]:
 
-`oxide.usergroup add {steam_id} [group-name]`
+`oxide.usergroup add {steam_id} group-name`
 
 Remove a player from a group:
 
-`oxide.usergroup remove {steam_id} [group-name]`
+`oxide.usergroup remove {steam_id} group-name`
 
 Give a permission to a player:
 
-`oxide.grant user {steam_id} [permission-name]`
+`oxide.grant user {steam_id} permission-name`
 
 Remove a permission from a player:
 
-`oxide.revoke user {steam_id} [permission-name]`
+`oxide.revoke user {steam_id} permission-name`
 
 ## Give an inventoy item or a kit
 
