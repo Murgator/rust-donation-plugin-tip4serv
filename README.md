@@ -66,17 +66,23 @@ Remove a permission from a player:
 
 `oxide.revoke user {steam_id} permission-name`
 
-## Give an inventoy item or a kit
+## Give an inventoy item (with username)
 
-[Give plugin](https://umod.org/plugins/give) is required
+`inventory.giveto {rust_username} item-short-name quantity`
+
+See [Rust item list](https://www.corrosionhour.com/rust-item-list/)
+
+Example: inventory.giveto {rust_username} scientist 5
+
+## Give an inventoy item or a kit (with steam_id)
+
+You can also use GIVE plugin: [Give plugin](https://umod.org/plugins/give)
 
 Give an item to a player inventory with Give plugin:
 
 `giveto {steam_id} item-short-name quantity`
 
 Example: `giveto {steam_id} fun.guitar 1`
-
-See [Rust item list](https://www.corrosionhour.com/rust-item-list/)
 
 Give a kit to a player with Give plugin:
 
