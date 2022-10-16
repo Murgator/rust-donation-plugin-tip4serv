@@ -68,7 +68,7 @@ Remove a permission from a player:
 
 ## Give an inventoy item or a kit
 
-Use [Give plugin](https://umod.org/plugins/give)
+[Give plugin](https://umod.org/plugins/give) is required
 
 Give an item to a player inventory with Give plugin:
 
