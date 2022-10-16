@@ -76,7 +76,7 @@ Example: inventory.giveto {rust_username} scientist 5
 
 ## Give an inventoy item or a kit (with steam_id)
 
-You can also use GIVE plugin: [Give plugin](https://umod.org/plugins/give)
+You can also use [Give plugin](https://umod.org/plugins/give)
 
 Give an item to a player inventory with Give plugin:
 
