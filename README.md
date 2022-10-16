@@ -68,17 +68,15 @@ Remove a permission from a player:
 
 ## Give an inventoy item or a kit
 
-Try `inventory.giveto {steam_id} item-short-name quantity`
-
-Example: `inventory.giveto {steam_id} fun.guitar 1`
-
-See [Rust item list](https://www.corrosionhour.com/rust-item-list/)
-
-If `inventory.giveto` command does not work on your server use [Give plugin](https://umod.org/plugins/give)
+Use [Give plugin](https://umod.org/plugins/give)
 
 Give an item to a player inventory with Give plugin:
 
 `giveto {steam_id} item-short-name quantity`
+
+Example: `giveto {steam_id} fun.guitar 1`
+
+See [Rust item list](https://www.corrosionhour.com/rust-item-list/)
 
 Give a kit to a player with Give plugin:
 
