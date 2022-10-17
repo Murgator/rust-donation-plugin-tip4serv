@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 
 namespace Oxide.Plugins
 {
-    [Info("Tip4serv", "Murgator & Duster", "1.2")]
+    [Info("Tip4serv", "Murgator & Duster", "1.3")]
     [Description("Allows Admin to monetize their Rust server from their Tip4serv store")]
     public class Tip4serv : CovalencePlugin
     {
@@ -124,7 +124,7 @@ namespace Oxide.Plugins
             string json_encoded = "";
             if (response.Count > 0)
             {
-                json_encoded = Utility.ConvertToJson(response);
+                json_encoded = System.Uri.EscapeDataString(Utility.ConvertToJson(response));
             }
             //request tip4serv
             string statusUrl = "https://api.tip4serv.com/payments_api_v2.php?id=" + key_parts[0] + "&time=" + timestamp + "&json=" + json_encoded + "&get_cmd=" + get_cmd;
