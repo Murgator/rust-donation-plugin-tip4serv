@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 
 namespace Oxide.Plugins
 {
-    [Info("Tip4serv", "Murgator & Duster", "1.3")]
+    [Info("Tip4serv", "Murgator & Duster", "1.3.2")]
     [Description("Allows Admin to monetize their Rust server from their Tip4serv store")]
     public class Tip4serv : CovalencePlugin
     {
@@ -39,7 +39,6 @@ namespace Oxide.Plugins
             public string id;
             public string steamid;
             public PaymentCmd[] cmds;
-            int status;
         }
         [Serializable]
         public class PaymentCmd
@@ -246,7 +245,7 @@ namespace Oxide.Plugins
             {
                 server.Command(cmd, CmdArgs);
             }
-            catch (Exception e)
+            catch
             {
                 return;
             }
