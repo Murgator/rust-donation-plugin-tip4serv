@@ -72,7 +72,7 @@ Remove a permission from a player:
 
 See [Rust item list](https://www.corrosionhour.com/rust-item-list/)
 
-Example: inventory.giveto {rust_username} scientist 5
+Example: `inventory.giveto {rust_username} scientist 5`
 
 ## Give an inventoy item or a kit (with steam_id)
 
