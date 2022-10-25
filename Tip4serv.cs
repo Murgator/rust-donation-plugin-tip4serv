@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 
 namespace Oxide.Plugins
 {
-    [Info("Tip4serv", "Murgator & Duster", "1.3.2")]
+    [Info("Tip4serv", "Murgator & Duster", "1.3.3")]
     [Description("Allows Admin to monetize their Rust server from their Tip4serv store")]
     public class Tip4serv : CovalencePlugin
     {
@@ -205,7 +205,7 @@ namespace Oxide.Plugins
                 }
                 //save the new json file
                 Interface.Oxide.DataFileSystem.WriteObject("tip4serv_response", response);
-            }, this, RequestMethod.GET, Headers);
+            }, this, RequestMethod.GET, Headers, 5000f);
         }
         private Dictionary<string, ResponseData> LoadFile(string path)
         {
