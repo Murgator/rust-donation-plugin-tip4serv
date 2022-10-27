@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 
 namespace Oxide.Plugins
 {
-    [Info("Tip4serv", "Murgator & Duster", "1.3.3")]
+    [Info("Tip4serv", "Murgator & Duster", "1.3.4")]
     [Description("Allows Admin to monetize their Rust server from their Tip4serv store")]
     public class Tip4serv : CovalencePlugin
     {
@@ -49,6 +49,7 @@ namespace Oxide.Plugins
         }
         private String key_msg = "Please set the config key to a valid key in your config/Tip4Serv.json file. Make sure you have copied the entire key on Tip4Serv.com (Ctrl+A then CTRL+C)";
         private bool Stopped = false;
+        private Timer PaymentTimer;
         private PluginConfig config;
         protected override void LoadDefaultConfig()
         {
@@ -77,6 +78,8 @@ namespace Oxide.Plugins
         private void Unload()
         {
             key_msg = null;
+            if(PaymentTimer != null && !PaymentTimer.Destroyed)
+                PaymentTimer.Destroy();
         }
         void OnServerInitialized()
         {
@@ -90,9 +93,7 @@ namespace Oxide.Plugins
                     return;
                 }
                 check_pending_commands(key_part, GetUnixTime(), "no");
-                timer.Repeat((float)config.request_interval_in_minutes * 60f, 0, () => {
-                    PaymentChecker();
-                });
+                PaymentTimer = timer.In((float)config.request_interval_in_minutes * 60f,() => PaymentChecker());
             }
         }
         private void PaymentChecker()
@@ -104,6 +105,9 @@ namespace Oxide.Plugins
                 return;
             }
             check_pending_commands(key_part, GetUnixTime(), "yes");
+            if(PaymentTimer!=null && !PaymentTimer.Destroyed)
+                PaymentTimer.Destroy();
+            PaymentTimer = timer.In((float)config.request_interval_in_minutes * 60f,() => PaymentChecker());
         }
         private string GetUnixTime()
         {
@@ -241,14 +245,8 @@ namespace Oxide.Plugins
         }
         private void exe_command(string cmd, string[] CmdArgs)
         {
-            try
-            {
-                server.Command(cmd, CmdArgs);
-            }
-            catch
-            {
-                return;
-            }
+            Tip4Print("Tip4serv execute command: "+cmd);
+            server.Command(cmd, CmdArgs);
         }
     }
 }
