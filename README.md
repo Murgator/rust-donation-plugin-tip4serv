@@ -45,7 +45,9 @@ Open an account on [Tip4serv.com](https://tip4serv.com/), follow the instruction
 > You should get this message: **Server has been successfully connected**
 
 ## Installation via RCON
-- Open an account at https://tip4serv.com/, follow the instructions and add a Rust server.
+Open an account on [Tip4serv.com](https://tip4serv.com/), follow the instructions and add a Rust server.
+
+- Click on Connect with RCON
 - Enter your server IP  
 - Enter your server RCON port
 - Enter your server RCON password
