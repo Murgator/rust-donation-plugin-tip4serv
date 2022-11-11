@@ -33,7 +33,7 @@ English, Danish, Dutch, English, French, German, Hungarian, Italian, Norwegian, 
 
 Here are the payment methods you can offer your players: Card, Paypal, Google Pay, Ideal, Giropay, Bancontact, Sofort, Sepa, EPS, BACS, Multibanco, BECS, Przelexy24, BOLETO, OXXO, Afterpay.
 
-## Installation
+## Installation via plugin
 
 Open an account on [Tip4serv.com](https://tip4serv.com/), follow the instructions and add a Rust server.
 
@@ -43,6 +43,13 @@ Open an account on [Tip4serv.com](https://tip4serv.com/), follow the instruction
 4) Reload plugin by typing `oxide.reload Tip4serv` in console.
 
 > You should get this message: **Server has been successfully connected**
+
+## Installation via RCON
+- Open an account at https://tip4serv.com/, follow the instructions and add a Rust server.
+- Enter your server IP  
+- Enter your server RCON port
+- Enter your server RCON password
+- You should get this message: Server has been successfully connected
 
 ## Setting up commands on Tip4Serv
 
