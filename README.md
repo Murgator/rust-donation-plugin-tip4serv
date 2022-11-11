@@ -37,10 +37,10 @@ Here are the payment methods you can offer your players: Card, Paypal, Google Pa
 
 Open an account on [Tip4serv.com](https://tip4serv.com/), follow the instructions and add a Rust server.
 
-1) Drag and drop `tip4serv.cs` into the oxide `plugins` directory on your Rust server.
-2) Reload the plugin by typing `oxide.reload Tip4serv` in your Rust server console.
-3) Set `key` to your tip4serv API key in the config file `tip4serv.json`.
-4) Reload plugin by typing `oxide.reload Tip4serv` in console.
+- Drag and drop `tip4serv.cs` into the oxide `plugins` directory on your Rust server.
+- Reload the plugin by typing `oxide.reload Tip4serv` in your Rust server console.
+- Set `key` to your tip4serv API key in the config file `tip4serv.json`.
+- Reload plugin by typing `oxide.reload Tip4serv` in console.
 
 > You should get this message: **Server has been successfully connected**
 
@@ -49,7 +49,8 @@ Open an account on [Tip4serv.com](https://tip4serv.com/), follow the instruction
 - Enter your server IP  
 - Enter your server RCON port
 - Enter your server RCON password
-- You should get this message: Server has been successfully connected
+
+> You should get this message: **Server has been successfully connected**
 
 ## Setting up commands on Tip4Serv
 
