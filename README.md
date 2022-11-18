@@ -60,6 +60,8 @@ Open an account on [Tip4serv.com](https://tip4serv.com/), follow the instruction
 
 Here are some commands you can use in the products configuration: [MY PRODUCTS](https://tip4serv.com/dashboard/my-products)
 
+## Give a group or permission
+
 Add a player to a group previously created with oxide.group add [group-name]:
 
 `oxide.usergroup add {steam_id} group-name`
