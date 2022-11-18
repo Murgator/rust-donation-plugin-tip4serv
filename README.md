@@ -98,6 +98,18 @@ Give a kit to a player with Give plugin:
 
 `givekitto {steam_id} kit-name`
 
+## Give money
+
+Give money to a player with [Economics plugin](https://umod.org/plugins/economics)
+
+`deposit {steam_id} amount`
+
+## Give points
+
+Give points to a player with [Server Rewards](https://umod.org/plugins/server-rewards)
+
+`sr add {rust_username} amount`
+
 ## Need help?
 
 [Contact us](https://tip4serv.com/contact)
