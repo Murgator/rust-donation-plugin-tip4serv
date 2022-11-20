@@ -59,6 +59,7 @@ Open an account on [Tip4serv.com](https://tip4serv.com/), follow the instruction
 ***Before setting up your commands on Tip4serv.com, you should know that command work in your server's console (not ingame as an admin).***
 
 Here are some sample commands you can use in the products configuration: [MY PRODUCTS](https://tip4serv.com/dashboard/my-products)
+
 But you can use any plugin commands you want.
 
 
@@ -80,7 +81,7 @@ Remove a permission from a player:
 
 `oxide.revoke user {steam_id} permission-name`
 
-## Give an inventoy item (with username)
+## Give an inventory item (with username)
 
 `inventory.giveto {rust_username} item-short-name quantity`
 
@@ -88,7 +89,7 @@ See [Rust item list](https://www.corrosionhour.com/rust-item-list/)
 
 Example: `inventory.giveto {rust_username} scientist 5`
 
-## Give an inventoy item or a kit (with steam_id)
+## Give an inventory item or a kit (with steam_id)
 
 You can also use [Give plugin](https://umod.org/plugins/give)
 
