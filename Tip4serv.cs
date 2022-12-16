@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 
 namespace Oxide.Plugins
 {
-    [Info("Tip4serv", "Murgator & Duster", "1.3.4")]
+    [Info("Tip4serv", "Murgator & Duster", "1.3.5")]
     [Description("Allows Admin to monetize their Rust server from their Tip4serv store")]
     public class Tip4serv : CovalencePlugin
     {
