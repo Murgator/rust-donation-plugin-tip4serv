@@ -31,7 +31,7 @@ English, Danish, Dutch, English, French, German, Hungarian, Italian, Norwegian, 
 
 ## Several payment methods
 
-Here are the payment methods you can offer your players: Card, Paypal, Google Pay, Ideal, Giropay, Bancontact, Sofort, Sepa, EPS, BACS, Multibanco, BECS, Przelexy24, BOLETO, OXXO, Afterpay.
+Here are the payment methods you can offer your players: Card, Paypal, Venmo, Google Pay, Ideal, Giropay, Bancontact, Sofort, My Bank, Sepa, EPS, BACS, Multibanco, BECS, Przelexy24, BOLETO, OXXO, Mercado Pago.
 
 ## Installation via plugin
 
