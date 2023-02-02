@@ -127,6 +127,18 @@ Give points to a player with [Server Rewards](https://umod.org/plugins/server-re
 
 `sr add {rust_username} amount`
 
+## Quantity multiplier
+
+You can also multiply the quantity choosen by the customer like this: `{quantity*50}`
+
+Note: You must first activate the **Allow quantity choice** option in your product.
+
+Use this command on Tip4serv if you want to sell bundles of $200 with economics plugin:
+`deposit {steam_id} {quantity*200}`
+
+This will run in your server console after a purchase if the player buys product 4 times:
+`deposit 76561198181797231 800`
+
 ## Need help?
 
 [Contact us](https://tip4serv.com/contact)
