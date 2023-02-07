@@ -1,4 +1,4 @@
-This plugin connects your [Tip4serv.com](https://tip4serv.com/) store to your Rust Oxide server. It checks if a player has made a donation on your Tip4Serv store and delivers the order in a minute (group, inventory item...) by typing commands in the server console.
+This plugin connects your [Tip4serv.com](https://tip4serv.com?ads=umod) store to your Rust Oxide server. It checks if a player has made a donation on your Tip4Serv store and delivers the order in a minute (group, inventory item...) by typing commands in the server console.
 
 ## HMAC authentication
 
@@ -35,7 +35,7 @@ Here are the payment methods you can offer your players: Card, Paypal, Venmo, Go
 
 ## Installation via plugin
 
-Open an account on [Tip4serv.com](https://tip4serv.com/), follow the instructions and add a Rust server.
+Open an account on [Tip4serv.com](https://tip4serv.com?ads=umod), follow the instructions and add a Rust server.
 
 - Drag and drop `tip4serv.cs` into the oxide `plugins` directory on your Rust server.
 - Reload the plugin by typing `oxide.reload Tip4serv` in your Rust server console.
