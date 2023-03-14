@@ -141,4 +141,6 @@ This will run in your server console after a purchase if the player buys product
 
 ## Need help?
 
+[Documentation](https://docs.tip4serv.com)
+
 [Contact us](https://tip4serv.com/contact)
