@@ -12,8 +12,8 @@ using System.Security.Cryptography;
 
 namespace Oxide.Plugins
 {
-    [Info("Tip4serv", "Murgator & Duster", "1.3.5")]
-    [Description("Allows Admin to monetize their Rust server from their Tip4serv store")]
+    [Info("Tip4serv", "Murgator & Duster", "1.3.6")]
+    [Description("Allows Admin to monetize their 7 Days to die & Rust server from their Tip4serv store")]
     public class Tip4serv : CovalencePlugin
     {
         private class PluginConfig
@@ -29,7 +29,7 @@ namespace Oxide.Plugins
             public string action;
             public Dictionary<int, int> cmds;
             public int status;
-            public string rust_username;
+            public string username;
         }
         [Serializable]
         public class Payments
@@ -39,6 +39,7 @@ namespace Oxide.Plugins
             public string id;
             public string steamid;
             public PaymentCmd[] cmds;
+   
         }
         [Serializable]
         public class PaymentCmd
@@ -67,8 +68,8 @@ namespace Oxide.Plugins
         }
         private void Loaded()
         {
-            #if !RUST
-               LogError("This plugin only works for the Rust Game");
+            #if !SEVENDAYSTODIE && !RUST
+               LogError("This plugin only works for the 7 Days to Die or Rust Game");
                Stopped = true;
             #else
                Tip4Print("Tip4serv plugin has started");
@@ -158,7 +159,7 @@ namespace Oxide.Plugins
                 {
                     Tip4Print(HTTPresponse);
                     return;
-                }
+                }                
                 //clear old json infos
                 Interface.Oxide.DataFileSystem.WriteObject("tip4serv_response", response);
                 var json_decoded = Utility.ConvertFromJson<List<Payments>>(HTTPresponse);
@@ -170,29 +171,39 @@ namespace Oxide.Plugins
                     string payment_id = json_decoded[i].id;
                     new_obj.date = DateTime.Now.ToString();
                     new_obj.action = json_decoded[i].action;
-                    new_obj.rust_username = "";
+                    new_obj.username = "";
                     //check if player is online
                     IPlayer player_infos = checkifPlayerIsLoaded(json_decoded[i].steamid);
                     if (player_infos != null)
                     {
-                        new_obj.rust_username = player_infos.Name;
+                        new_obj.username = player_infos.Name;
                         player_infos.Message(config.order_received_text);
                     }
-                    if (!json_decoded[i].cmds.IsEmpty())
+                    if (json_decoded[i].cmds.Length != 0)
                     {
                         for (int j = 0; j < json_decoded[i].cmds.Length; j++)
                         {
                             //do not run this command if the player must be online
                             if (player_infos == null && (json_decoded[i].cmds[j].str.Contains("{") || (json_decoded[i].cmds[j].state == 1)))
                             {
+      
                                 new_obj.status = 14;
                             }
                             else
-                            {
+                            {                                
+                                #if SEVENDAYSTODIE
+                                if (json_decoded[i].cmds[j].str.Contains("{7dtd_username}"))
+                                #elif RUST
                                 if (json_decoded[i].cmds[j].str.Contains("{rust_username}"))
+                                #endif
                                 {
-                                    if (player_infos != null)
+                                    if (player_infos != null) {
+                                        #if SEVENDAYSTODIE
+                                        json_decoded[i].cmds[j].str = json_decoded[i].cmds[j].str.Replace("{7dtd_username}", player_infos.Name);
+                                        #elif RUST 
                                         json_decoded[i].cmds[j].str = json_decoded[i].cmds[j].str.Replace("{rust_username}", player_infos.Name);
+                                        #endif                                       
+                                    }
                                 }
                                 string[] empty = { };
                                 exe_command(json_decoded[i].cmds[j].str, empty);
@@ -229,11 +240,12 @@ namespace Oxide.Plugins
         }
         private IPlayer checkifPlayerIsLoaded(string steam_id)
         {
-            IPlayer SteamPlayer = covalence.Players.FindPlayerById(steam_id);
+            IPlayer SteamPlayer = covalence.Players.FindPlayerById(steam_id);          
             if (SteamPlayer == null)
             {
                 return null;
             }
+            #if RUST
             if (SteamPlayer.IsConnected)
             {
                 return SteamPlayer;
@@ -242,6 +254,18 @@ namespace Oxide.Plugins
             {
                 return null;
             }
+            #elif SEVENDAYSTODIE
+            try {
+                //here is the trick we get the position
+                //if the position of the player is returned it mean the player is connected
+                //on the other case if Position() throw an exception it means that the player ain't connected 
+                GenericPosition JUNKPOS = SteamPlayer.Position(); 
+                return SteamPlayer;
+            } catch(KeyNotFoundException e) {
+                return null;
+            }
+            #endif
+            return null;
         }
         private void exe_command(string cmd, string[] CmdArgs)
         {
