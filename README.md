@@ -1,4 +1,4 @@
-This plugin connects your [Tip4serv.com](https://tip4serv.com?ads=umod) store to your Rust Oxide server. It checks if a player has made a donation on your Tip4Serv store and delivers the order in a minute (group, inventory item...) by typing commands in the server console.
+This plugin connects your [Tip4serv.com](https://tip4serv.com?ads=umod) store to your Rust & 7 Days To Die Oxide server. It checks if a player has made a donation on your Tip4Serv store and delivers the order in a minute (group, inventory item...) by typing commands in the server console.
 
 ## HMAC authentication
 
@@ -35,16 +35,16 @@ Here are the payment methods you can offer your players: Card, Paypal, Venmo, Go
 
 ## Installation via plugin
 
-Open an account on [Tip4serv.com](https://tip4serv.com?ads=umod), follow the instructions and add a Rust server.
+Open an account on [Tip4serv.com](https://tip4serv.com?ads=umod), follow the instructions and add a Rust or 7 Days To Die server.
 
-- Drag and drop `tip4serv.cs` into the oxide `plugins` directory on your Rust server.
-- Reload the plugin by typing `oxide.reload Tip4serv` in your Rust server console.
+- Drag and drop `tip4serv.cs` into the oxide `plugins` directory on your game server.
+- Reload the plugin by typing `oxide.reload Tip4serv` in your game server console.
 - Set `key` to your tip4serv API key in the config file `tip4serv.json`.
 - Reload plugin by typing `oxide.reload Tip4serv` in console.
 
 > You should get this message: **Server has been successfully connected**
 
-## Installation via RCON
+## Installation via RCON (Rust only)
 Open an account on [Tip4serv.com](https://tip4serv.com/), follow the instructions and add a Rust server.
 
 - Click on Connect with RCON
@@ -81,7 +81,7 @@ Remove a permission from a player:
 
 `oxide.revoke user {steam_id} permission-name`
 
-## Give an inventory item with steam_id (advised)
+## Give an inventory item with steam_id (Rust only)
 
 **IMPORTANT: Please select the option [Player must be online] in your product editor**
 
@@ -91,7 +91,7 @@ Example: `inventory.giveto {steam_id} scientist 5`
 
 See [Rust item list](https://www.corrosionhour.com/rust-item-list/)
 
-## Give an inventory item with username
+## Give an inventory item with username (Rust only)
 
 **IMPORTANT: Please select the option [Player must be online] in your product editor**
 
@@ -121,7 +121,7 @@ Give money to a player with [Economics plugin](https://umod.org/plugins/economic
 
 `deposit {steam_id} amount`
 
-## Give points
+## Give points (Rust only)
 
 Give points to a player with [Server Rewards](https://umod.org/plugins/server-rewards)
 
