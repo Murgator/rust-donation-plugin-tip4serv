@@ -62,6 +62,9 @@ Here are some sample commands you can use in the products configuration: [MY PRO
 
 But you can use any plugin commands you want.
 
+## Advertise in public chat
+
+`say Thank you {rust_username} for your donation of {total_paid} {currency}`
 
 ## Give a group or permission
 
