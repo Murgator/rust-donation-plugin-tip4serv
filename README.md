@@ -68,7 +68,7 @@ But you can use any plugin commands you want.
 
 Example with colors:
 
-`say {rust_username} just purchased <color=red>VIP</color> from <color=orange>tip4serv.com</color> `
+`say {rust_username} just purchased <color=red>VIP</color> from <color=orange>tip4serv.com</color>`
 
 ## Give a group or permission
 
