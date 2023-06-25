@@ -66,6 +66,10 @@ But you can use any plugin commands you want.
 
 `say Thank you {rust_username} for your donation of {total_paid} {currency}`
 
+Example with colors:
+
+`say {rust_username} just purchased <color=red>VIP</color> from <color=orange>tip4serv.com</color> `
+
 ## Give a group or permission
 
 Add a player to a group previously created with oxide.group add [group-name]:
