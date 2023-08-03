@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 
 namespace Oxide.Plugins
 {
-    [Info("Tip4serv", "Murgator & Duster", "1.4.1")]
+    [Info("Tip4serv", "Murgator & Duster", "1.4.2")]
     [Description("Allows Admin to monetize their 7 Days to die & Rust server from their Tip4serv store")]
     public class Tip4serv : CovalencePlugin
     {
@@ -52,6 +52,8 @@ namespace Oxide.Plugins
         private bool Stopped = false;
         private Timer PaymentTimer;
         private PluginConfig config;
+    
+        private bool ready = true; //avoid request overflows
         protected override void LoadDefaultConfig()
         {
             LogWarning("Creating a new configuration file");
@@ -66,8 +68,18 @@ namespace Oxide.Plugins
                 order_received_text = "[#cyan][Tip4serv][/#] You have received your order. Thank you !"
             };
         }
+        private Dictionary<String,IPlayer> GetPlayers() {
+            IEnumerable<IPlayer> players = covalence.Players.Connected;
+             Dictionary<String,IPlayer> tip4customers = new Dictionary<string,IPlayer>();
+            foreach (IPlayer player in players)
+            {
+                tip4customers[player.Id] = player;
+            }
+           return tip4customers;
+        }
         private void Loaded()
         {
+            
             #if !SEVENDAYSTODIE && !RUST
                LogError("This plugin only works for the 7 Days to Die or Rust Game");
                Stopped = true;
@@ -121,6 +133,8 @@ namespace Oxide.Plugins
         }
         private void check_pending_commands(string[] key_parts, string timestamp, string get_cmd)
         {
+            if(!ready)
+                return;
             //HMAC calculation
             string HMAC = calculateHMAC(key_parts, timestamp);
             //get last infos from the json file
@@ -133,19 +147,23 @@ namespace Oxide.Plugins
             //request tip4serv
             string statusUrl = "https://api.tip4serv.com/payments_api_v2.php?id=" + key_parts[0] + "&time=" + timestamp + "&json=" + json_encoded + "&get_cmd=" + get_cmd;
             Dictionary<string, string> Headers = new Dictionary<string, string> { { "Authorization", HMAC } };
+            this.ready = false;
             webrequest.Enqueue(statusUrl, null, (code, HTTPresponse) => {
+
                 if (code != 200 || HTTPresponse == null)
                 {
                     if (get_cmd == "no")
                     {
                         Tip4Print("Tip4serv API is temporarily unavailable, maybe you are making too many requests. Please try again later");
                     }
+                    this.ready=true;
                     return;
                 }
                 //tip4serv connect
                 if (get_cmd == "no")
                 {
                     Tip4Print(HTTPresponse);
+                    this.ready=true;
                     return;
                 }
                 response.Clear();
@@ -153,15 +171,18 @@ namespace Oxide.Plugins
                 if (HTTPresponse.Contains("No pending payments found"))
                 {
                     Interface.Oxide.DataFileSystem.WriteObject("tip4serv_response", response);
+                    this.ready=true;
                     return;
                 }
                 else if (HTTPresponse.StartsWith("\"[Tip4serv "))
                 {
                     Tip4Print(HTTPresponse);
+                    this.ready=true;
                     return;
                 }                
                 //clear old json infos
                 Interface.Oxide.DataFileSystem.WriteObject("tip4serv_response", response);
+                Dictionary<String,IPlayer> players = GetPlayers();
                 var json_decoded = Utility.ConvertFromJson<List<Payments>>(HTTPresponse);
                 //loop customers
                 for (int i = 0; i < json_decoded.Count; i++)
@@ -173,7 +194,7 @@ namespace Oxide.Plugins
                     new_obj.action = json_decoded[i].action;
                     new_obj.username = "";
                     //check if player is online
-                    IPlayer player_infos = checkifPlayerIsLoaded(json_decoded[i].steamid);
+                    IPlayer player_infos = checkifPlayerIsLoaded(json_decoded[i].steamid,players);
                     if (player_infos != null)
                     {
                         new_obj.username = player_infos.Name;
@@ -220,6 +241,8 @@ namespace Oxide.Plugins
                 }
                 //save the new json file
                 Interface.Oxide.DataFileSystem.WriteObject("tip4serv_response", response);
+                this.ready=true;
+
             }, this, RequestMethod.GET, Headers, 5000f);
         }
         private Dictionary<string, ResponseData> LoadFile(string path)
@@ -238,9 +261,10 @@ namespace Oxide.Plugins
             HMACstr = Convert.ToBase64String(Encoding.ASCII.GetBytes(HMACstr));
             return HMACstr;
         }
-        private IPlayer checkifPlayerIsLoaded(string steam_id)
+        private IPlayer checkifPlayerIsLoaded(string steam_id, Dictionary<string,IPlayer> players)
         {
-            IPlayer SteamPlayer = covalence.Players.FindPlayerById(steam_id);          
+ 
+            IPlayer SteamPlayer = players.TryGetValue(steam_id, out SteamPlayer) ? SteamPlayer : null;     
             if (SteamPlayer == null)
             {
                 return null;
