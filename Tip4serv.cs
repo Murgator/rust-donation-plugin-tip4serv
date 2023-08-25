@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 
 namespace Oxide.Plugins
 {
-    [Info("Tip4serv", "Murgator & Duster", "1.4.2")]
+    [Info("Tip4serv", "Murgator & Duster", "1.4.3")]
     [Description("Allows Admin to monetize their 7 Days to die & Rust server from their Tip4serv store")]
     public class Tip4serv : CovalencePlugin
     {
@@ -53,7 +53,6 @@ namespace Oxide.Plugins
         private Timer PaymentTimer;
         private PluginConfig config;
     
-        private bool ready = true; //avoid request overflows
         protected override void LoadDefaultConfig()
         {
             LogWarning("Creating a new configuration file");
@@ -133,8 +132,6 @@ namespace Oxide.Plugins
         }
         private void check_pending_commands(string[] key_parts, string timestamp, string get_cmd)
         {
-            if(!ready)
-                return;
             //HMAC calculation
             string HMAC = calculateHMAC(key_parts, timestamp);
             //get last infos from the json file
@@ -147,7 +144,6 @@ namespace Oxide.Plugins
             //request tip4serv
             string statusUrl = "https://api.tip4serv.com/payments_api_v2.php?id=" + key_parts[0] + "&time=" + timestamp + "&json=" + json_encoded + "&get_cmd=" + get_cmd;
             Dictionary<string, string> Headers = new Dictionary<string, string> { { "Authorization", HMAC } };
-            this.ready = false;
             webrequest.Enqueue(statusUrl, null, (code, HTTPresponse) => {
 
                 if (code != 200 || HTTPresponse == null)
@@ -156,14 +152,12 @@ namespace Oxide.Plugins
                     {
                         Tip4Print("Tip4serv API is temporarily unavailable, maybe you are making too many requests. Please try again later");
                     }
-                    this.ready=true;
                     return;
                 }
                 //tip4serv connect
                 if (get_cmd == "no")
                 {
                     Tip4Print(HTTPresponse);
-                    this.ready=true;
                     return;
                 }
                 response.Clear();
@@ -171,13 +165,11 @@ namespace Oxide.Plugins
                 if (HTTPresponse.Contains("No pending payments found"))
                 {
                     Interface.Oxide.DataFileSystem.WriteObject("tip4serv_response", response);
-                    this.ready=true;
                     return;
                 }
                 else if (HTTPresponse.StartsWith("\"[Tip4serv "))
                 {
                     Tip4Print(HTTPresponse);
-                    this.ready=true;
                     return;
                 }                
                 //clear old json infos
@@ -241,9 +233,8 @@ namespace Oxide.Plugins
                 }
                 //save the new json file
                 Interface.Oxide.DataFileSystem.WriteObject("tip4serv_response", response);
-                this.ready=true;
 
-            }, this, RequestMethod.GET, Headers, 5000f);
+            }, this, RequestMethod.GET, Headers, 30f);
         }
         private Dictionary<string, ResponseData> LoadFile(string path)
         {
