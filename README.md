@@ -6,27 +6,27 @@ Tip4serv adds a layer of security using HMAC authentication to communicate. It i
 
 ## Features for starter plan (only 5% fee)
 
-*Unlimited game servers & commands
-*Create subscriptions plan
-*Commands status tracking
-*Stock management
-*Deliver roles & messages on Discord
-*Create discount coupon
-*Add managers for your store
-*Purchase email and invoice
-*Sales statistics
-*Private flow for subscribers
-*Custom sub-domain
-*Resend commands
-*No ads
+- Unlimited game servers & commands
+- Create subscriptions plan
+- Commands status tracking
+- Stock management
+- Deliver roles & messages on Discord
+- Create discount coupon
+- Add managers for your store
+- Purchase email and invoice
+- Sales statistics
+- Private flow for subscribers
+- Custom sub-domain
+- Resend commands
+- No ads
 
 ## Features for PRO members (subscription required)
 
-*Dynamic Dark/Light theme
-*Account linking with avatars
-*Product page with gallery & video
-*GUI colors editor & additional CSS
-*Top customers & related products
+- Dynamic Dark/Light theme
+- Account linking with avatars
+- Product page with gallery & video
+- GUI colors editor & additional CSS
+- Top customers & related products
 
 ## Store available in 15 languages
 
