@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 
 namespace Oxide.Plugins
 {
-    [Info("Tip4serv", "Murgator & Duster", "1.4.5")]
+    [Info("Tip4serv", "Murgator & Duster", "1.4.6")]
     [Description("Allows Admin to monetize their 7 Days to die & Rust server from their Tip4serv store")]
     public class Tip4serv : CovalencePlugin
     {
@@ -77,8 +77,7 @@ namespace Oxide.Plugins
            return tip4customers;
         }
         private void Loaded()
-        {
-            
+        {            
             #if !SEVENDAYSTODIE && !RUST
                LogError("This plugin only works for the 7 Days to Die or Rust Game");
                Stopped = true;
@@ -238,7 +237,19 @@ namespace Oxide.Plugins
         }
         private Dictionary<string, ResponseData> LoadFile(string path)
         {
-            Dictionary<string, ResponseData> response = Interface.Oxide.DataFileSystem.ReadObject<Dictionary<string, ResponseData>>("tip4serv_response");
+            Dictionary<string, ResponseData> response;
+            try
+            {
+                response = Interface.Oxide.DataFileSystem.ReadObject<Dictionary<string, ResponseData>>("tip4serv_response");
+                if (response == null)
+                {
+                    response = new Dictionary<string, ResponseData>();
+                }
+            }
+            catch (Exception)
+            {
+                response = new Dictionary<string, ResponseData>();
+            }
             return response;
         }
         private string calculateHMAC(string[] key_parts, string timestamp)
