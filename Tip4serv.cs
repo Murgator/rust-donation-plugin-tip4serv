@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 
 namespace Oxide.Plugins
 {
-    [Info("Tip4serv", "Murgator & Duster", "1.4.6")]
+    [Info("Tip4serv", "Murgator & Duster", "1.4.7")]
     [Description("Allows Admin to monetize their 7 Days to die & Rust server from their Tip4serv store")]
     public class Tip4serv : CovalencePlugin
     {
@@ -141,9 +141,10 @@ namespace Oxide.Plugins
                 json_encoded = System.Uri.EscapeDataString(Utility.ConvertToJson(response));
             }
             //request tip4serv
-            string statusUrl = "https://api.tip4serv.com/payments_api_v2.php?id=" + key_parts[0] + "&time=" + timestamp + "&json=" + json_encoded + "&get_cmd=" + get_cmd;
+            string ApiUrl = "https://api.tip4serv.com/payments_api_v2.php?id=" + key_parts[0] + "&time=" + timestamp;
+            string EntireApiUrl = ApiUrl + "&json=" + json_encoded + "&get_cmd=" + get_cmd;
             Dictionary<string, string> Headers = new Dictionary<string, string> { { "Authorization", HMAC } };
-            webrequest.Enqueue(statusUrl, null, (code, HTTPresponse) => {
+            webrequest.Enqueue(EntireApiUrl, null, (code, HTTPresponse) => {
 
                 if (code != 200 || HTTPresponse == null)
                 {
@@ -161,7 +162,7 @@ namespace Oxide.Plugins
                 }
                 response.Clear();
                 //check for errors
-                if (HTTPresponse.Contains("No pending payments found"))
+                if (HTTPresponse.Contains("No pending payments found") || get_cmd == "update")
                 {
                     Interface.Oxide.DataFileSystem.WriteObject("tip4serv_response", response);
                     return;
@@ -175,6 +176,7 @@ namespace Oxide.Plugins
                 Interface.Oxide.DataFileSystem.WriteObject("tip4serv_response", response);
                 Dictionary<String,IPlayer> players = GetPlayers();
                 var json_decoded = Utility.ConvertFromJson<List<Payments>>(HTTPresponse);
+                var update_now = false;
                 //loop customers
                 for (int i = 0; i < json_decoded.Count; i++)
                 {
@@ -220,6 +222,7 @@ namespace Oxide.Plugins
                                 string[] empty = { };
                                 exe_command(json_decoded[i].cmds[j].str, empty);
                                 new_cmds[json_decoded[i].cmds[j].id] = 3;
+                                update_now = true;
                             }
                         }
                         new_obj.cmds = new_cmds;
@@ -232,8 +235,21 @@ namespace Oxide.Plugins
                 }
                 //save the new json file
                 Interface.Oxide.DataFileSystem.WriteObject("tip4serv_response", response);
+                //update commands status on tip4serv if a command has been delivered
+                if (update_now == true){
+                    json_encoded = System.Uri.EscapeDataString(Utility.ConvertToJson(response));
+                    string EntireApiUrl = ApiUrl + "&json=" + json_encoded + "&get_cmd=update";
+                    Dictionary<string, string> Headers = new Dictionary<string, string> { { "Authorization", HMAC } };
+                    webrequest.Enqueue(EntireApiUrl, null, (code, HTTPresponse) => {
+                        if (code == 200 && HTTPresponse != null){
+                            response.Clear();
+                            Interface.Oxide.DataFileSystem.WriteObject("tip4serv_response", response);
+                        }
+                        return;
+                    }, this, RequestMethod.GET, Headers, 10f);
+                }
 
-            }, this, RequestMethod.GET, Headers, 30f);
+            }, this, RequestMethod.GET, Headers, 10f);
         }
         private Dictionary<string, ResponseData> LoadFile(string path)
         {
