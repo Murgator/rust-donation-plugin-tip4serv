@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 
 namespace Oxide.Plugins
 {
-    [Info("Tip4serv", "Murgator & Duster", "1.4.7")]
+    [Info("Tip4serv", "Murgator & Duster", "1.4.8")]
     [Description("Allows Admin to monetize their 7 Days to die & Rust server from their Tip4serv store")]
     public class Tip4serv : CovalencePlugin
     {
@@ -133,18 +133,24 @@ namespace Oxide.Plugins
         {
             //HMAC calculation
             string HMAC = calculateHMAC(key_parts, timestamp);
+            
             //get last infos from the json file
             Dictionary<string, ResponseData> response = LoadFile("tip4serv_response");
             string json_encoded = "";
             if (response.Count > 0)
             {
-                json_encoded = System.Uri.EscapeDataString(Utility.ConvertToJson(response));
+                json_encoded = Utility.ConvertToJson(response);
             }
-            //request tip4serv
+            
+            //Url parameters
             string ApiUrl = "https://api.tip4serv.com/payments_api_v2.php?id=" + key_parts[0] + "&time=" + timestamp;
-            string EntireApiUrl = ApiUrl + "&json=" + json_encoded + "&get_cmd=" + get_cmd;
-            Dictionary<string, string> Headers = new Dictionary<string, string> { { "Authorization", HMAC } };
-            webrequest.Enqueue(EntireApiUrl, null, (code, HTTPresponse) => {
+            string EntireApiUrl = ApiUrl + "&get_cmd=" + get_cmd;
+            
+            //Header HMAC
+            Dictionary<string, string> Headers = new Dictionary<string, string> { { "Authorization", HMAC }, { "Content-Type", "application/json" } };
+            
+            //Post Request
+            webrequest.Enqueue(EntireApiUrl, json_encoded, (code, HTTPresponse) => {
 
                 if (code != 200 || HTTPresponse == null)
                 {
@@ -237,19 +243,26 @@ namespace Oxide.Plugins
                 Interface.Oxide.DataFileSystem.WriteObject("tip4serv_response", response);
                 //update commands status on tip4serv if a command has been delivered
                 if (update_now == true){
-                    json_encoded = System.Uri.EscapeDataString(Utility.ConvertToJson(response));
-                    string EntireApiUrl = ApiUrl + "&json=" + json_encoded + "&get_cmd=update";
-                    Dictionary<string, string> Headers = new Dictionary<string, string> { { "Authorization", HMAC } };
-                    webrequest.Enqueue(EntireApiUrl, null, (code, HTTPresponse) => {
+                    
+                    //Json response data
+                    json_encoded = Utility.ConvertToJson(response);
+                    
+                    //Url parameters
+                    string EntireApiUrl = ApiUrl + "&get_cmd=update";
+                    
+                    //Header HMAC
+                    Dictionary<string, string> Headers = new Dictionary<string, string> { { "Authorization", HMAC }, { "Content-Type", "application/json" } };
+                    
+                    webrequest.Enqueue(EntireApiUrl, json_encoded, (code, HTTPresponse) => {
                         if (code == 200 && HTTPresponse != null){
                             response.Clear();
                             Interface.Oxide.DataFileSystem.WriteObject("tip4serv_response", response);
                         }
                         return;
-                    }, this, RequestMethod.GET, Headers, 10f);
+                    }, this, RequestMethod.POST, Headers, 10f);
                 }
 
-            }, this, RequestMethod.GET, Headers, 10f);
+            }, this, RequestMethod.POST, Headers, 10f);
         }
         private Dictionary<string, ResponseData> LoadFile(string path)
         {
